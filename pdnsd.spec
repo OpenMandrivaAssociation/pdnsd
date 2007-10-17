@@ -1,5 +1,5 @@
-%define srcver 1.2.5
-%define release %mkrel 2
+%define srcver 1.2.6
+%define release %mkrel 1
 %define ver %{srcver}-par
 # '-' are denied in %version
 %define version %(echo '%ver' | sed 's/-/./')
@@ -25,7 +25,7 @@ Version: %{version}
 Release: %{release}
 License: GPL
 Group:  Networking/Other
-Source: http://www.phys.uu.nl/~rombouts/pdnsd/releases/pdnsd-%{ver}.tar.bz2
+Source: http://www.phys.uu.nl/~rombouts/pdnsd/releases/pdnsd-%{ver}.tar.gz
 Source1: %name.initscript
 Source2: %name.conf
 #Patch: %{name}-%{ver}.diff.bz2
