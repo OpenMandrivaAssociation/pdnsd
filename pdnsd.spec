@@ -30,7 +30,6 @@ Source1: %name.initscript
 Source2: %name.conf
 #Patch: %{name}-%{ver}.diff.bz2
 URL: http://www.phys.uu.nl/~rombouts/pdnsd/index.html
-BuildRoot: %{_tmppath}/%{name}-%{version}-root
 Requires(pre): rpm-helper
 Requires(postun): rpm-helper
 
