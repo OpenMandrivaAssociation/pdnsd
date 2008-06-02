@@ -83,7 +83,7 @@ OPTIONS=""
 EOF
 
 mkdir -p %buildroot%{cachedir}
-mkdir -p %buildroot%{_localstatedir}/%name
+mkdir -p %buildroot%{_localstatedir}/lib/%name
 
 mkdir -p %buildroot%{_sysconfdir}
 install -m 644 %SOURCE2 %buildroot%{_sysconfdir}/%name.conf
@@ -92,7 +92,7 @@ install -m 644 %SOURCE2 %buildroot%{_sysconfdir}/%name.conf
 rm -rf "$RPM_BUILD_ROOT"
 
 %pre
-%_pre_useradd %name %_localstatedir/%name /bin/true
+%_pre_useradd %name %_localstatedir/lib/%name /bin/true
 
 %postun
 %_postun_userdel %name
@@ -117,6 +117,6 @@ rm -rf "$RPM_BUILD_ROOT"
 %_mandir/man5/pdnsd.conf.5*
 %attr(755,pdnsd,pdnsd) %dir %{cachedir}
 %attr(644,pdnsd,pdnsd) %ghost %{cachedir}/pdnsd.cache
-%attr(755,pdnsd,pdnsd) %dir %_localstatedir/%name
+%attr(755,pdnsd,pdnsd) %dir %_localstatedir/lib/%name
 
 
