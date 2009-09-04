@@ -1,5 +1,5 @@
 %define srcver 1.2.7
-%define release %mkrel 1
+%define release %mkrel 2
 %define ver %{srcver}-par
 # '-' are denied in %version
 %define version %(echo '%ver' | sed 's/-/./')
