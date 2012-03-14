@@ -1,5 +1,5 @@
-%define srcver 1.2.7
-%define release %mkrel 2
+%define srcver 1.2.9
+%define release %mkrel 1
 %define ver %{srcver}-par
 # '-' are denied in %version
 %define version %(echo '%ver' | sed 's/-/./')
@@ -23,14 +23,12 @@ Summary: A caching dns proxy for small networks or dialin accounts
 Name: pdnsd
 Version: %{version}
 Release: %{release}
-License: GPL
-Group:  Networking/Other
-Source: http://www.phys.uu.nl/~rombouts/pdnsd/releases/pdnsd-%{ver}.tar.gz
+License: GPLv3+
+Group: Networking/Other
+Source0: http://www.phys.uu.nl/~rombouts/pdnsd/releases/pdnsd-%{ver}.tar.gz
 Source1: %name.initscript
 Source2: %name.conf
-#Patch: %{name}-%{ver}.diff.bz2
 URL: http://www.phys.uu.nl/~rombouts/pdnsd/index.html
-BuildRoot: %{_tmppath}/%{name}-%{version}-root
 Requires(pre): rpm-helper
 Requires(postun): rpm-helper
 
@@ -54,7 +52,6 @@ Source rpm support those options (--without options to disable):
 
 %prep
 %setup -q -n %{name}-%{srcver}
-#%patch -p2 -E
 
 %build
 %configure \
@@ -70,7 +67,6 @@ Source rpm support those options (--without options to disable):
 %make
 
 %install
-rm -rf "$RPM_BUILD_ROOT"
 %makeinstall_std
 
 mkdir -p %buildroot%_initrddir %buildroot%_sysconfdir/sysconfig
@@ -88,19 +84,19 @@ mkdir -p %buildroot%{_localstatedir}/lib/%name
 mkdir -p %buildroot%{_sysconfdir}
 install -m 644 %SOURCE2 %buildroot%{_sysconfdir}/%name.conf
 
-%clean
-rm -rf "$RPM_BUILD_ROOT"
-
 %pre
 %_pre_useradd %name %_localstatedir/lib/%name /bin/true
-
-%postun
-%_postun_userdel %name
 
 %post
 # Creating ghost file
 [ -f %_var/cache/pdnsd/pdnsd.cache ] || echo -n -e "pd11\0\0\0\0" > %_var/cache/pdnsd/pdnsd.cache
+%_post_service pdnsd
 
+%preun
+%_preun_service pdnsd
+
+%postun
+%_postun_userdel %name
 
 %files
 %defattr(-,root,root)
@@ -108,7 +104,7 @@ rm -rf "$RPM_BUILD_ROOT"
 %doc doc/html doc/txt
 %attr(644,root,root) %_sysconfdir/pdnsd.conf.sample
 %attr(644,root,root) %config(noreplace) %_sysconfdir/pdnsd.conf
-%attr(755,root,root) %config(noreplace) %_sysconfdir/sysconfig/%name
+%attr(644,root,root) %config(noreplace) %_sysconfdir/sysconfig/%name
 %attr(755,root,root) %config(noreplace) %_initrddir/%name
 %_sbindir/pdnsd
 %_sbindir/pdnsd-ctl
@@ -118,5 +114,3 @@ rm -rf "$RPM_BUILD_ROOT"
 %attr(755,pdnsd,pdnsd) %dir %{cachedir}
 %attr(644,pdnsd,pdnsd) %ghost %{cachedir}/pdnsd.cache
 %attr(755,pdnsd,pdnsd) %dir %_localstatedir/lib/%name
-
-
