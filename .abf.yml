@@ -1,4 +1,2 @@
 sources:
-  "pdnsd-1.2.9-par.tar.gz:"	5fa8cd87fe9f8fa1a95b82379259452b2974e7e8
-  "pdnsd.conf:"	484dc86ca9356505cde6c85c473d69133990b499
-  "pdnsd.initscript:"	31c13c7ca631a42d6f175e5c1d0944c249cc2287
+  "pdnsd-1.2.9-par.tar.gz": 5fa8cd87fe9f8fa1a95b82379259452b2974e7e8

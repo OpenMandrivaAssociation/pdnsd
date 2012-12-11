@@ -1,0 +1,62 @@
+#!/bin/sh
+#
+# chkconfig: 345 60 40
+# description: Starts and stops the pdnsd server, a DNS caching daemon
+
+# Source function library.
+. /etc/init.d/functions
+
+# Source networking configuration.
+. /etc/sysconfig/network
+
+# Check that networking is up.
+[ ${NETWORKING} = "no" ] && exit 0
+
+NAME=pdnsd
+BINARY=/usr/sbin/pdnsd
+PROCESS=pdnsd
+LOCKFILE=/var/lock/subsys/pdnsd
+RETVAL=0
+
+[ -x /etc/sysconfig/pdnsd ] && . /etc/sysconfig/pdnsd
+
+start() {
+	gprintf "Starting %s: " "$NAME"
+	daemon $BINARY -d $OPTIONS
+	RETVAL=$?
+	echo
+	[ $RETVAL -eq 0 ] && touch $LOCKFILE
+}	
+stop() {
+	gprintf "Shutting down %s: " "$NAME"
+	killproc $PROCESS
+	RETVAL=$?
+	echo
+	[ $RETVAL -eq 0 ] && rm -f $LOCKFILE
+}	
+
+
+case "$1" in
+  start)
+  	start
+	;;
+  stop)
+  	stop
+	;;
+  restart|reload)
+	stop
+	start
+	;;
+  status)
+	status $PROCESS
+	RETVAL=$?
+	;;
+  condrestart)
+  	[ -f $LOCKFILE ] && restart
+	;;
+  *)
+	gprintf "Usage: %s {start|stop|restart|status|condrestart}\n" "$0"
+	RETVAL=1
+esac
+
+exit $?

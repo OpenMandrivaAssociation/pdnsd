@@ -114,3 +114,60 @@ install -m 644 %SOURCE2 %buildroot%{_sysconfdir}/%name.conf
 %attr(755,pdnsd,pdnsd) %dir %{cachedir}
 %attr(644,pdnsd,pdnsd) %ghost %{cachedir}/pdnsd.cache
 %attr(755,pdnsd,pdnsd) %dir %_localstatedir/lib/%name
+
+
+%changelog
+* Wed Mar 14 2012 Dmitry Mikhirev <dmikhirev@mandriva.org> 1.2.9.par-1mdv2011.0
++ Revision: 785009
+- update to 1.2.9
+
+* Fri Sep 04 2009 Thierry Vignaud <tv@mandriva.org> 1.2.7.par-2mdv2010.0
++ Revision: 430251
+- rebuild
+
+* Fri Sep 19 2008 Frederik Himpe <fhimpe@mandriva.org> 1.2.7.par-1mdv2009.0
++ Revision: 285993
+- Update to version 1.2.7 for important security fixes:
+  port randomisation fixing CVE-2008-1447 and a fix for a denial of
+  service (issue 2 of SA31847: http://secunia.com/advisories/31847/)
+
+* Wed Jul 30 2008 Thierry Vignaud <tv@mandriva.org> 1.2.6.par-3mdv2009.0
++ Revision: 255174
+- rebuild
+- kill re-definition of %%buildroot on Pixel's request
+
+  + Pixel <pixel@mandriva.com>
+    - adapt to %%_localstatedir now being /var instead of /var/lib (#22312)
+
+  + Olivier Blin <blino@mandriva.org>
+    - restore BuildRoot
+
+* Thu Oct 18 2007 Olivier Thauvin <nanardon@mandriva.org> 1.2.6.par-1mdv2008.1
++ Revision: 99813
+- 1.2.6-par
+
+
+* Wed Jan 17 2007 Olivier Thauvin <nanardon@mandriva.org> 1.2.5.par-2mdv2007.0
++ Revision: 110032
+- fix permission and daemon uid (thx to Antonio <freenix at libero.it>)
+- provide a default config file
+- bunzip initscript
+
+* Mon Jan 08 2007 Olivier Thauvin <nanardon@mandriva.org> 1.2.5.par-1mdv2007.1
++ Revision: 106126
+- 1.2.5
+- Import pdnsd
+
+* Tue May 02 2006 Olivier Thauvin <nanardon@mandriva.org> 1.2.4.par-2mdk
+- %%mkrel (/me sucks, thanks misc)
+
+* Tue May 02 2006 Olivier Thauvin <nanardon@mandriva.org> 1.2.4.par-1mdk
+- 1.2.4-par
+- update urls
+
+* Thu May 13 2004 Olivier Thauvin <thauvin@aerov.jussieu.fr> 1.1.11.par-1mdk
+- mdk adaptation
+
+* Sun Feb 08 2004 Paul Rombouts <p.a.rombouts@home.nl>
+- Remove obsolete source files after patching.
+
