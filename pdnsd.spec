@@ -21,7 +21,7 @@ Summary: A caching dns proxy for small networks or dialin accounts
 
 Name: pdnsd
 Version: %(echo '%ver' | sed 's/-/./')
-Release: 2
+Release: 3
 License: GPLv3+
 Group:   Networking/Other
 Source0: http://www.phys.uu.nl/~rombouts/pdnsd/releases/pdnsd-%{ver}.tar.gz
