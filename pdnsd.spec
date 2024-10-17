@@ -27,7 +27,7 @@ Group:   Networking/Other
 Source0: http://www.phys.uu.nl/~rombouts/pdnsd/releases/pdnsd-%{ver}.tar.gz
 Source1: %{name}.initscript
 Source2: %{name}.conf
-URL: http://www.phys.uu.nl/~rombouts/pdnsd/index.html
+URL: https://www.phys.uu.nl/~rombouts/pdnsd/index.html
 Requires(pre): rpm-helper
 Requires(postun): rpm-helper
 
